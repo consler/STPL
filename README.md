@@ -26,3 +26,8 @@ Commands:
 ```sub``` - 2 arguments, subtracts two numbers and writes the result to the current cell
 
 ```mul``` - 2 arguments, multiplies two numbers and writes the result to the current cell
+
+
+### Code example can be found at the ```input``` variable in src/global.java
+
+https://www.notion.so/STPL-38d999327b5c4cd097c5d30a85c8d494
