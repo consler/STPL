@@ -74,6 +74,24 @@ public class runtime {
                     }
 
                 }
+                case "gof" -> {
+                    try{
+                        tape.pointer++;
+                    } catch (Exception e){
+                        System.out.println("Cell " + (tape.pointer + 1) + " does not exist. Not terminating");
+                        continue;
+                    }
+
+                }
+                case "gob" -> {
+                    try{
+                        tape.pointer--;
+                    } catch (Exception e){
+                        System.out.println("Cell " + (tape.pointer - 1) + " does not exist. Not terminating");
+                        continue;
+                    }
+
+                }
                 case "pru" -> {
                     System.out.print((char) tape.tape[tape.pointer]);
                 }
@@ -85,6 +103,21 @@ public class runtime {
                 }
                 case "mul" -> {
                     tape.tape[tape.pointer] = arguments[0] * arguments[1];
+                }
+                case "div" -> {
+                    tape.tape[tape.pointer] = arguments[0] / arguments[1];
+                }
+                case "and" -> {
+                    tape.tape[tape.pointer] = arguments[0] & arguments[1];
+                }
+                case "orr" -> {
+                    tape.tape[tape.pointer] = arguments[0] | arguments[1];
+                }
+                case "xor" -> {
+                    tape.tape[tape.pointer] = arguments[0] ^ arguments[1];
+                }
+                case "com" -> {
+                    tape.tape[tape.pointer] = ~(arguments[0]);
                 }
                 default -> {
                     System.err.println("An unknown command at line " + current_line_count + ". Not terminating");
