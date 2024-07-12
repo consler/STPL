@@ -2,7 +2,7 @@
 ## STPL is a simple turing programming language with an assembly-like look.
 
 
-###Commands:
+### Commands:
 
 all - 1 argument, allocats cells to the program. Must always be at the first line. all 10 would give 11 cells to the program, from 0 to 10.
 
