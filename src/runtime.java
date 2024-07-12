@@ -1,3 +1,5 @@
+import static java.lang.Character.compare;
+
 public class runtime {
 
     public static void run() {
@@ -6,9 +8,9 @@ public class runtime {
         
         String command;
 
-        int current_line_count = 0;
 
-        for (String current_line : readable) {
+        for (int current_line_count = 0; current_line_count<readable.length;current_line_count++) {
+            String current_line = readable[current_line_count];
             //if something unknown skip
             if(current_line.length() < 4){
                 continue;
@@ -29,11 +31,21 @@ public class runtime {
             {
                 int j=0;
                 for(String i : temp_arguments) {
-                    arguments[j] = Integer.parseInt(i);
+                    if(Character.compare(i.charAt(0), 'p') == 0){
+                        try{
+                            arguments[j] = tape.tape[Integer.parseInt(i.substring(1))];
+                        } catch (Exception e) {
+                            System.err.println("A cell seems to not exist at " + current_line_count);
+                            break;
+                        }
+                    } else{
+                        arguments[j] = Integer.parseInt(i);
+                    }
                     j++;
                 }
 
             } catch (Exception e){
+
                 System.err.println("One of the arguments does not seem to be an integer at line " + current_line_count);
                 break;
             }
@@ -119,6 +131,20 @@ public class runtime {
                 case "com" -> {
                     tape.tape[tape.pointer] = ~(arguments[0]);
                 }
+                case "jum" -> {
+                    current_line_count = arguments[0];
+                }
+                case "juf" -> {
+                    current_line_count = current_line_count + arguments[0];
+                }
+                case "jub" -> {
+                    current_line_count = current_line_count - arguments[0];
+                }
+                case "jui" -> {
+                    if(!(tape.tape[tape.pointer] == arguments[0])){
+                        current_line_count = arguments[1];
+                    }
+                }
                 default -> {
                     System.err.println("An unknown command at line " + current_line_count + ". Not terminating");
                     continue;
@@ -128,8 +154,6 @@ public class runtime {
             //garbage collection
             arguments = null;
             System.gc();
-
-            current_line_count++;
         }
     }
 }
