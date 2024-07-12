@@ -1,33 +1,49 @@
 # STPL
-### STPL is a simple turing programming language with an assembly-like look.
+## STPL is a simple turing programming language with an assembly-like look.
 
 
-Commands:
+###Commands:
 
+all - 1 argument, allocats cells to the program. Must always be at the first line. all 10 would give 11 cells to the program, from 0 to 10.
 
-```all``` - 1 argument, allocats cells to the program. Must always be at line 0. ```all 10 `` would give 11 cells to the program, from 0 to 10.
+set - 1 argument, sets current cell to an integer from -2³¹ to 2³¹
 
+gto - 1 argument, goes to a cell, limited to what you allocated
 
-```set``` - 1 argument, sets current cell to an integer from -2³¹ to 2³¹
+pri - no arguments, prints the current cell's integer
 
+pru - no arguments, prints the UTF-8 equivalent of the current cell's integer
 
-```gto``` - 1 argument, goes to a cell, limited to what you allocated 
+add - 2 arguments, adds two numbers and writes the result to the current cell
 
+sub - 2 arguments, subtracts two numbers and writes the result to the current cell
 
-```pri``` - no arguments, prints the current cell's integer
+mul - 2 arguments, multiplies two numbers and writes the result to the current cell
 
+div - 2 arguments, divides two numbers and writes the result to the current cell(integer only)
 
-```pru``` - no arguments, prints the UTF-8 equivalent of the current cell's integer 
+juf - 1 argument, jumps forward in code by lines
 
+jub - 1 argument, jumps backward in code by lines
 
-```add``` - 2 arguments, adds two numbers and writes the result to the current cell
+jum - 1 argument, jumps to a line in code (NOTE: count for lines start from 0 after all)
 
+jif- 2 arguments, jumps forward by 2nd argument lines in code if current cell does not equal to 1st argument
 
-```sub``` - 2 arguments, subtracts two numbers and writes the result to the current cell
+jib- 2 arguments, jumps backward by 2nd argument lines in code if current cell does not equal to 1st argument
 
-```mul``` - 2 arguments, multiplies two numbers and writes the result to the current cell
+jui- 2 arguments, to line 2nd argument in code if current cell does not equal to 1st argument
 
+orr - 2 arguments, bitwise or
 
-### Code example can be found at the ```input``` variable in src/global.java
+and - 2 arguments, bitwise and
 
-https://www.notion.so/STPL-38d999327b5c4cd097c5d30a85c8d494
+xor - 2 arguments, bitwise xor
+
+com - 1 arguments, java bitwise "complement" operator
+
+### Notes: 
+Everything starts from 0.
+You can get a value of a cell by doing p<cell>, for example p13
+Code is edited at src/global
+Most runtime things to know is ar src/runtime
