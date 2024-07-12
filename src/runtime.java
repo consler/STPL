@@ -12,12 +12,37 @@ public class runtime {
         for (int current_line_count = 0; current_line_count<readable.length;current_line_count++) {
             String current_line = readable[current_line_count];
             //if something unknown skip
-            if(current_line.length() < 4){
+            if(current_line.length() == 1){
+                continue;
+            } else if(current_line.length()<4) {
+                System.err.println("Not a valid string at line " + current_line_count + ". Skipping");
+                continue;
+            }
+            //if longer then 3 skip
+            if (!(Character.compare(current_line.charAt(3), ' ') == 0 || Character.compare(current_line.charAt(3), ';') == 0 )) {
+                System.err.println("Command at line " + current_line_count + " seems to not be equal to 3 characters long. Skipping");
                 continue;
             }
 
+
+
             // current command assignment
+
             command = current_line.substring(0, 3);
+
+
+            // error handling (I just want to add some frustration to this world)
+            if(!(current_line.endsWith(";")))
+            {
+                System.err.println("Semicolon missed at line " + current_line_count + ". Skipping");
+                continue;
+            }
+
+            if(current_line_count == 0 && !(command.equals("all"))) {
+                System.err.println("Allocation should be done at line 0. Terminating");
+                break;
+            }
+
 
             // making an arguments table for arguments  (duh)
             String[] temp_arguments = new String[0];
@@ -35,8 +60,8 @@ public class runtime {
                         try{
                             arguments[j] = tape.tape[Integer.parseInt(i.substring(1))];
                         } catch (Exception e) {
-                            System.err.println("A cell seems to not exist at " + current_line_count);
-                            break;
+                            System.err.println("A cell seems to not exist at " + current_line_count + ". Skipping");
+                            continue;
                         }
                     } else{
                         arguments[j] = Integer.parseInt(i);
@@ -46,110 +71,207 @@ public class runtime {
 
             } catch (Exception e){
 
-                System.err.println("One of the arguments does not seem to be an integer at line " + current_line_count);
-                break;
+                System.err.println("One of the arguments does not seem to be an integer at line " + current_line_count + ". Skipping");
+                continue;
             }
             //no need for temp now
             temp_arguments = null;
             System.gc();
 
-            // error handling (I just want to add some frustration to this world)
-            if(!(current_line.endsWith(";")))
-            {
-                System.err.println("Semicolon missed at line " + current_line_count);
-                break;
-            }
 
-            if(current_line_count == 0 && !(command.equals("all"))) {
-                System.err.println("Allocation should be done at line 0");
-                break;
-            }
 
             //runtime process itself
-            switch (command)
-            {
-                case "all" -> { // memory allocation
-                    tape.tape_load(arguments[0]);
-                }
-                case "pri" -> { //print out the number
-                    System.out.print(tape.tape[tape.pointer]);
-                }
-                case "set" -> { // set current cell to
-                    tape.tape[tape.pointer] = arguments[0];
-                }
-                case "gto" -> {
-                    try{
-                        tape.pointer = arguments[0];
-                    } catch (Exception e){
-                        System.out.println("Cell " + arguments[0] + " does not exist. Not terminating");
+            try{
+                switch (command)
+                {
+                    case "all" -> { // memory allocation
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape_load(arguments[0]);
+                    }
+                    case "pri" -> { //print out the number
+                        if(arguments.length != 0) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        System.out.print(tape.tape[tape.pointer]);
+                    }
+                    case "set" -> { // set current cell to
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0];
+                    }
+                    case "gto" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            tape.pointer = arguments[0];
+                        } catch (Exception e){
+                            System.out.println("Cell " + arguments[0] + " does not exist. Skipping");
+                            continue;
+                        }
+
+                    }
+                    case "gof" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            tape.pointer =+ arguments[0];
+                        } catch (Exception e){
+                            System.out.println("Cell " + (tape.pointer + arguments[0]) + " does not exist. Skipping");
+                            continue;
+                        }
+
+                    }
+                    case "gob" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            tape.pointer =- arguments[0];
+                        } catch (Exception e){
+                            System.out.println("Cell " + (tape.pointer - arguments[0]) + " does not exist. Skipping");
+                            continue;
+                        }
+
+                    }
+                    case "pru" -> {
+                        if(arguments.length != 0) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        System.out.print((char) tape.tape[tape.pointer]);
+                    }
+                    case "add" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] + arguments[1];
+                    }
+                    case "sub" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] - arguments[1];
+                    }
+                    case "mul" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] * arguments[1];
+                    }
+                    case "div" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] / arguments[1];
+                    }
+                    case "and" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] & arguments[1];
+                    }
+                    case "orr" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] | arguments[1];
+                    }
+                    case "xor" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = arguments[0] ^ arguments[1];
+                    }
+                    case "com" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        tape.tape[tape.pointer] = ~(arguments[0]);
+                    }
+                    case "jum" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            current_line_count = arguments[0];
+                        } catch (Exception e) {
+                            System.err.println("Out of bounds at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+
+                    }
+                    case "juf" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            current_line_count = current_line_count + arguments[0];
+                        } catch (Exception e){
+                            System.err.println("Out of bounds at line " + current_line_count + ". Skipping");
+                        }
+                    }
+                    case "jub" -> {
+                        if(arguments.length != 1) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            current_line_count = current_line_count - arguments[0];
+                        } catch (Exception e){
+                            System.err.println("Out of bounds at line " + current_line_count + ". Skipping");
+                        }
+                    }
+                    case "jui" -> {
+                        if(arguments.length != 2) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        try{
+                            if(!(tape.tape[tape.pointer] == arguments[0])){
+                                current_line_count = arguments[1];
+                            }
+                        } catch (Exception e){
+                            System.err.println("Out of bounds at line " + current_line_count + ". Skipping");
+                        }
+                    }
+                    case "ter" -> {
+                        if(arguments.length != 0) {
+                            System.err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
+                            continue;
+                        }
+                        break;
+                    }
+                    default -> {
+                        System.err.println("An unknown command at line " + current_line_count + ". Skipping");
                         continue;
                     }
-
                 }
-                case "gof" -> {
-                    try{
-                        tape.pointer++;
-                    } catch (Exception e){
-                        System.out.println("Cell " + (tape.pointer + 1) + " does not exist. Not terminating");
-                        continue;
-                    }
-
-                }
-                case "gob" -> {
-                    try{
-                        tape.pointer--;
-                    } catch (Exception e){
-                        System.out.println("Cell " + (tape.pointer - 1) + " does not exist. Not terminating");
-                        continue;
-                    }
-
-                }
-                case "pru" -> {
-                    System.out.print((char) tape.tape[tape.pointer]);
-                }
-                case "add" -> {
-                    tape.tape[tape.pointer] = arguments[0] + arguments[1];
-                }
-                case "sub" -> {
-                    tape.tape[tape.pointer] = arguments[0] - arguments[1];
-                }
-                case "mul" -> {
-                    tape.tape[tape.pointer] = arguments[0] * arguments[1];
-                }
-                case "div" -> {
-                    tape.tape[tape.pointer] = arguments[0] / arguments[1];
-                }
-                case "and" -> {
-                    tape.tape[tape.pointer] = arguments[0] & arguments[1];
-                }
-                case "orr" -> {
-                    tape.tape[tape.pointer] = arguments[0] | arguments[1];
-                }
-                case "xor" -> {
-                    tape.tape[tape.pointer] = arguments[0] ^ arguments[1];
-                }
-                case "com" -> {
-                    tape.tape[tape.pointer] = ~(arguments[0]);
-                }
-                case "jum" -> {
-                    current_line_count = arguments[0];
-                }
-                case "juf" -> {
-                    current_line_count = current_line_count + arguments[0];
-                }
-                case "jub" -> {
-                    current_line_count = current_line_count - arguments[0];
-                }
-                case "jui" -> {
-                    if(!(tape.tape[tape.pointer] == arguments[0])){
-                        current_line_count = arguments[1];
-                    }
-                }
-                default -> {
-                    System.err.println("An unknown command at line " + current_line_count + ". Not terminating");
-                    continue;
-                }
+            } catch (Exception e) {
+                System.err.println("Something weird happened at line " + current_line_count + ". Terminating");
+                break;
             }
+
 
             //garbage collection
             arguments = null;
