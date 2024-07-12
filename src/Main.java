@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        //global.input for input
-        runtime.run();
+        String input = files.getContent(files.getInput());
+        runtime.run(input);
     }
 }

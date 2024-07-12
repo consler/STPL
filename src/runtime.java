@@ -2,9 +2,9 @@ import static java.lang.Character.compare;
 
 public class runtime {
 
-    public static void run() {
+    public static void run(String input) {
         // taking it from global for easier access
-        String[] readable = global.readable;
+        String[] readable = input.split("\n");
         
         String command;
 
@@ -29,7 +29,6 @@ public class runtime {
             // current command assignment
 
             command = current_line.substring(0, 3);
-
 
             // error handling (I just want to add some frustration to this world)
             if(!(current_line.endsWith(";")))
