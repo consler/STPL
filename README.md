@@ -44,6 +44,9 @@ com - 1 arguments, java bitwise "complement" operator
 
 ### Notes: 
 Everything starts from 0.
-You can get a value of a cell by doing p<cell>, for example p13
-Code is edited at src/global
-Most runtime things to know is ar src/runtime
+
+You can get a value of a cell by doing p<cell>, for example p13.
+
+When program starts, path to your file needs to be entered.
+
+Most runtime things to know is ar src/runtime.
