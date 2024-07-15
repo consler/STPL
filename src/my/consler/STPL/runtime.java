@@ -11,14 +11,14 @@ public class runtime {
         String command;
 
 
-        for (int current_line_count = 0; current_line_count<readable.length;current_line_count++) {
-            int semi_colon = readable[current_line_count].indexOf(';');
-            String current_line = readable[current_line_count].substring(0, semi_colon + 1);
+        for (int current_line_count = 1; current_line_count<=readable.length;current_line_count++) {
+            int semi_colon = readable[current_line_count - 1].indexOf(';');
+            String current_line = readable[current_line_count - 1].substring(0, semi_colon + 1);
+
             //if something unknown skip
             if(current_line.length() == 1){
                 continue;
             } else if(current_line.length()<4) {
-                err.println("Not a valid string at line " + current_line_count + ". Skipping");
                 continue;
             }
             //if longer then 3 skip
@@ -32,7 +32,6 @@ public class runtime {
             // current command assignment
 
             command = current_line.substring(0, 3);
-
             // error handling (I just want to add some frustration to this world)
             if(!(current_line.endsWith(";")))
             {
@@ -40,11 +39,10 @@ public class runtime {
                 continue;
             }
 
-            if(current_line_count == 0 && !(command.equals("all"))) {
-                err.println("Allocation should be done at line 0. Terminating");
+            if(current_line_count == 1 && !(command.equals("all"))) {
+                err.println("Allocation should be done at line 1. Terminating");
                 break;
             }
-
 
             // making an arguments table for arguments  (duh)
             String[] temp_arguments = new String[0];
@@ -215,7 +213,7 @@ public class runtime {
                             continue;
                         }
                         try{
-                            current_line_count = arguments[0];
+                            current_line_count = arguments[0] - 1;
                         } catch (Exception e) {
                             err.println("Out of bounds at line " + current_line_count + ". Skipping");
                             continue;
@@ -251,7 +249,7 @@ public class runtime {
                         }
                         try{
                             if(!(tape.tape[tape.tape_pointer][tape.pointer] == arguments[0])){
-                                current_line_count = arguments[1];
+                                current_line_count = arguments[1] -1 ;
                             }
                         } catch (Exception e){
                             err.println("Out of bounds at line " + current_line_count + ". Skipping");
@@ -282,6 +280,10 @@ public class runtime {
             }
 
             //debugging only
+//            out.println(current_line_count);
+//
+//            out.println(command);
+//
 //            out.print("\n");
 //            for(int i = 0; i<tape.tape.length; i++){
 //                for(int j = 0; j<tape.tape[0].length; j++){
