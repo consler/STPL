@@ -260,7 +260,7 @@ public class runtime {
                             err.println("Wrong amount of arguments at line " + current_line_count + ". Skipping");
                             continue;
                         }
-                        break;
+                        exit(1);
                     }
                     case "tap" -> {
                         if(arguments.length != 1) {

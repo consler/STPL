@@ -9,4 +9,4 @@ sub p0 1; subtracting 1 from cell 0
 gto 1; going to line 1
 pru; printing out the space
 gto 0; going back to line 0
-jui 0 7; jumping to line 8 if current cell is not 0
+jui 0 7; jumping to line 7 if current cell is not 0
