@@ -1,0 +1,40 @@
+all 1 13; allocating 1 tape and 13 cells
+
+set 72; this is all hello world
+pru;
+gof 1;
+set 101;
+pru;
+gof 1;
+set 108;
+pru;
+gof 1;
+set 108;
+pru;
+gof 1;
+set 111;
+pru;
+gof 1;
+set 44;
+pru;
+gof 1;
+set 32;
+pru;
+gof 1;
+set 119;
+pru;
+gof 1;
+set 111;
+pru;
+gof 1;
+set 114;
+pru;
+gof 1;
+set 108;
+pru;
+gof 1;
+set 100;
+pru;
+gof 1;
+set 32;
+pru;
