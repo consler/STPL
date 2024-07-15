@@ -4,7 +4,7 @@
 
 ### Commands:
 
-all - 1 argument, allocats cells to the program. Must always be at the first line. all 10 would give 11 cells to the program, from 0 to 10.
+all - 2 argument, allocats cells to the program. Must always be at the first line. all 10 20 would give 11 tapes to the program, from 0 to 10. Every tape would have 21 cells.
 
 set - 1 argument, sets current cell to an integer from -2³¹ to 2³¹
 
@@ -41,6 +41,10 @@ and - 2 arguments, bitwise and
 xor - 2 arguments, bitwise xor
 
 com - 1 arguments, java bitwise "complement" operator
+
+ter - no arguemnts, terminates the program
+
+tap - 1 arguement, switches current tape
 
 ### Notes: 
 Everything starts from 0.
