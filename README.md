@@ -1,56 +1,66 @@
 # STPL
-## STPL is a simple turing programming language with an assembly-like look.
 
+## STPL is a simple turing programming language with an assembly-like look, made in Java. You may use it if you really want to challange yourself.
+
+### Installation
+
+You will need to download JRE 17 to run STPL.
+
+You can find the latest version at [Tags](https://github.com/consler/STPL/tags) .
+
+
+### Running
+
+``` java -jar path/to/STPL.jar path/to/your/program.stpl```
 
 ### Commands:
 
-all - 2 argument, allocats cells to the program. Must always be at the first line. all 10 20 would give 11 tapes to the program, from 0 to 10. Every tape would have 21 cells.
+```all``` - 2 argument, allocats cells to the program. Must always be at the first line. all 10 20 would give 11 tapes to the program, from 0 to 10. Every tape would have 21 cells.
 
-set - 1 argument, sets current cell to an integer from -2³¹ to 2³¹
+```set``` - 1 argument, sets current cell to an integer from -2³¹ to 2³¹
 
-gto - 1 argument, goes to a cell, limited to what you allocated
+```gto``` - 1 argument, goes to a cell, limited to what you allocated
 
-pri - no arguments, prints the current cell's integer
+```pri``` - no arguments, prints the current cell's integer
 
-pru - no arguments, prints the UTF-8 equivalent of the current cell's integer
+```pru``` - no arguments, prints the UTF-8 equivalent of the current cell's integer
 
-add - 2 arguments, adds two numbers and writes the result to the current cell
+```add``` - 2 arguments, adds two numbers and writes the result to the current cell
 
-sub - 2 arguments, subtracts two numbers and writes the result to the current cell
+```sub``` - 2 arguments, subtracts two numbers and writes the result to the current cell
 
-mul - 2 arguments, multiplies two numbers and writes the result to the current cell
+```mul``` - 2 arguments, multiplies two numbers and writes the result to the current cell
 
-div - 2 arguments, divides two numbers and writes the result to the current cell(integer only)
+```div``` - 2 arguments, divides two numbers and writes the result to the current cell(integer only)
 
-juf - 1 argument, jumps forward in code by lines
+```juf``` - 1 argument, jumps forward in code by lines
 
-jub - 1 argument, jumps backward in code by lines
+```jub``` - 1 argument, jumps backward in code by lines
 
-jum - 1 argument, jumps to a line in code (NOTE: count for lines start from 0 after all)
+```jum``` - 1 argument, jumps to a line in code (NOTE: count for lines start from 0 after all)
 
-jif- 2 arguments, jumps forward by 2nd argument lines in code if current cell does not equal to 1st argument
+```jif```- 2 arguments, jumps forward by 2nd argument lines in code if current cell does not equal to 1st argument
 
-jib- 2 arguments, jumps backward by 2nd argument lines in code if current cell does not equal to 1st argument
+```jib```- 2 arguments, jumps backward by 2nd argument lines in code if current cell does not equal to 1st argument
 
-jui- 2 arguments, to line 2nd argument in code if current cell does not equal to 1st argument
+```jui```- 2 arguments, to line 2nd argument in code if current cell does not equal to 1st argument
 
-orr - 2 arguments, bitwise or
+```orr``` - 2 arguments, bitwise or
 
-and - 2 arguments, bitwise and
+```and``` - 2 arguments, bitwise and
 
-xor - 2 arguments, bitwise xor
+```xor``` - 2 arguments, bitwise xor
 
-com - 1 arguments, java bitwise "complement" operator
+```com``` - 1 arguments, java bitwise "complement" operator
 
-ter - no arguemnts, terminates the program
+```ter``` - no arguemnts, terminates the program
 
-tap - 1 arguement, switches current tape
+```tap``` - 1 arguement, switches current tape
 
 ### Notes: 
-Everything starts from 0.
 
-You can get a value of a cell by doing p<cell>, for example p13.
+You can get a value of a cell(of the current tape) by doing p\<cell\>, for example p13.
 
-When program starts, path to your file needs to be entered.
+Most runtime things to know is ar [src/runtime.](https://github.com/consler/STPL/blob/main/src/my/consler/STPL/runtime.java).
 
-Most runtime things to know is ar src/runtime.
+You can find some code examples at [examples](https://github.com/consler/STPL/tree/main/examples).
