@@ -1,6 +1,6 @@
 # STPL
 
-## STPL is a simple turing programming language with an assembly-like look, made in Java. You may use it if you really want to challange yourself.
+## STPL is a simple turing programming language with an assembly-like look, made in Java.
 
 ### Installation
 
