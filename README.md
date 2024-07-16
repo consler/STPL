@@ -51,7 +51,7 @@ You can find the latest version at [Tags](https://github.com/consler/STPL/tags) 
 
 ```xor``` - 2 arguments, bitwise xor
 
-```com``` - 1 arguments, java bitwise "complement" operator
+```com``` - 1 argument, java bitwise "complement" operator
 
 ```ter``` - no arguemnts, terminates the program
 
