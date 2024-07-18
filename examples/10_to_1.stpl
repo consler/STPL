@@ -1,11 +1,11 @@
-all 2 2; allocating the amount of cell to the program
+all  2 2; allocating the amount of cell to the program
 tap 1; settign tape to 1
-gto 1; going to cell 1 for the space symbol
+gto  1; going to cell 1 for the space symbol
 set 32; setting it to 32(ascii of space)
 gto 0; going back to 0
 set 10; setting to 10 for count
 pri; printing out the answer
-sub p0 1; subtracting 1 from cell 0
+sub t1p0 1; subtracting 1 from cell 0
 gto 1; going to line 1
 pru; printing out the space
 gto 0; going back to line 0
