@@ -13,6 +13,8 @@ You can find the latest version at [Tags](https://github.com/consler/STPL/tags) 
 
 ``` java -jar path/to/STPL.jar path/to/your/program.stpl```
 
+It is recommended to set up an alias.
+
 ### Commands:
 
 ```all``` - 2 argument, allocats cells to the program. Must always be at the first line. all 10 20 would give 11 tapes to the program, from 0 to 10. Every tape would have 21 cells.
@@ -57,10 +59,16 @@ You can find the latest version at [Tags](https://github.com/consler/STPL/tags) 
 
 ```tap``` - 1 arguement, switches current tape
 
+```inp``` - no arguements, takes user input(must be an integer) and writes it to the current cell
+
+```inu``` - no arguements, takes the user input(must be 1 character string) and writes the utf8 equvalent of it to the curren cell
+
+```int``` - 1 arguement, takes the user input and writes every letter in separate cell in tape 1st arguement
+
 ### Notes: 
 
-You can get a value of a cell(of the current tape) by doing p\<cell\>, for example p13.
+You can get a value of a cell by doing t\<tape\>p\<cell\>, for example t2p13.
 
-Most runtime things to know is ar [src/runtime.](https://github.com/consler/STPL/blob/main/src/my/consler/STPL/runtime.java).
+Most runtime things to know is at [src/runtime.](https://github.com/consler/STPL/blob/main/src/my/consler/STPL/runtime.java).
 
 You can find some code examples at [examples](https://github.com/consler/STPL/tree/main/examples).
