@@ -1,5 +1,9 @@
 # STPL
 
+# This repo is no longer developed, check [rip_to_this_rep.md](https://github.com/consler/STPL/blob/main/rip_to_this_rep.md)
+
+
+
 ## STPL is a simple turing programming language with an assembly-like look, made in Java.
 
 ### Installation
